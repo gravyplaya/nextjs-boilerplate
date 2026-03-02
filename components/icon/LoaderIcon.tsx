@@ -1,4 +1,4 @@
-export default function LoaderIcon() {
+const LoaderIcon = () => {
   return (
     <svg
       className="h-5 w-5 animate-spin"
@@ -14,4 +14,6 @@ export default function LoaderIcon() {
       />
     </svg>
   );
-}
+};
+
+export default LoaderIcon;

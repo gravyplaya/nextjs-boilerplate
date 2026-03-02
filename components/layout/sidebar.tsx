@@ -217,7 +217,7 @@ const SidebarContent = ({
   </div>
 );
 
-export function Sidebar() {
+export const Sidebar = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [collapsed, setCollapsed] = React.useState(false);
   const { user, logout } = useAuth();
@@ -334,4 +334,4 @@ export function Sidebar() {
       </aside>
     </>
   );
-}
+};

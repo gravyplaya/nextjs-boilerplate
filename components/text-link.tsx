@@ -6,12 +6,7 @@ type LinkProps = ComponentProps<typeof Link> & {
   variant?: "default" | "underlined";
 };
 
-export default function TextLink({
-  className = "",
-  children,
-  variant = "default",
-  ...props
-}: LinkProps) {
+const TextLink = ({ className = "", children, variant = "default", ...props }: LinkProps) => {
   return (
     <Link
       className={cn(
@@ -25,4 +20,6 @@ export default function TextLink({
       {children}
     </Link>
   );
-}
+};
+
+export default TextLink;

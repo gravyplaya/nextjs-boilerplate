@@ -130,7 +130,7 @@ This boilerplate uses **Next.js 15** (15.1.11) for **stability and security**. Y
 │   └── utils.ts                 # Helpers (+ tests)
 ├── e2e/                         # Playwright E2E tests
 ├── .github/workflows/           # CI (check.yml, playwright.yml)
-└── public/                     # Static assets (favicon, og image, etc.)
+└── public/                      # Static assets (favicon, og image, etc.)
 ```
 
 ## ⚙️ Configuration

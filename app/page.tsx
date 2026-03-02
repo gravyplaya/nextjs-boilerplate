@@ -2,10 +2,12 @@
 
 import HeroSection from "@/components/hero-section";
 
-export default function HomePage() {
+const Page = () => {
   return (
     <div>
       <HeroSection />
     </div>
   );
-}
+};
+
+export default Page;

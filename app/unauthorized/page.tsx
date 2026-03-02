@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function UnauthorizedPage() {
+const Page = () => {
   return (
     <div className="flex min-h-[calc(100vh-200px)] items-center justify-center">
       <Card className="w-full max-w-md">
@@ -20,4 +20,6 @@ export default function UnauthorizedPage() {
       </Card>
     </div>
   );
-}
+};
+
+export default Page;

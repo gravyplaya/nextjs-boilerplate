@@ -4,7 +4,7 @@ import type React from "react";
 import { useAuth } from "@/lib/auth/auth-context";
 import { Sidebar } from "@/components/layout/sidebar";
 
-export default function ProtectedLayout({
+const ProtectedLayout = ({
   children,
   user,
   admin,
@@ -12,7 +12,7 @@ export default function ProtectedLayout({
   children: React.ReactNode;
   user: React.ReactNode;
   admin: React.ReactNode;
-}) {
+}) => {
   const { user: currentUser } = useAuth();
 
   const content = currentUser?.role === "admin" ? admin : user;
@@ -25,4 +25,6 @@ export default function ProtectedLayout({
       </main>
     </div>
   );
-}
+};
+
+export default ProtectedLayout;

@@ -3,7 +3,7 @@
 import type React from "react";
 import Link from "next/link";
 
-export default function GlobalError({ reset }: { reset: () => void }) {
+const GlobalError = ({ reset }: { reset: () => void }) => {
   return (
     <html lang="en">
       <body>
@@ -33,4 +33,6 @@ export default function GlobalError({ reset }: { reset: () => void }) {
       </body>
     </html>
   );
-}
+};
+
+export default GlobalError;

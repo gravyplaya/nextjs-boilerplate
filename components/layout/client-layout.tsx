@@ -7,7 +7,7 @@ interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
-export default function ClientLayout({ children }: ClientLayoutProps) {
+const ClientLayout = ({ children }: ClientLayoutProps) => {
   const pathname = usePathname();
 
   const protectedRoutes = ["/dashboard"];
@@ -21,4 +21,6 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <div className="min-h-screen transition-all duration-300 ease-in-out">{children}</div>
     </>
   );
-}
+};
+
+export default ClientLayout;

@@ -17,7 +17,7 @@ import InputError from "@/components/ui/input-error";
 import TextLink from "@/components/text-link";
 import { HeadManager } from "@/components/common/head-manager";
 
-export default function LoginPage() {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -261,4 +261,6 @@ export default function LoginPage() {
       </div>
     </>
   );
-}
+};
+
+export default Page;

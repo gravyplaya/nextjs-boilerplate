@@ -15,7 +15,7 @@ import { ThemeToggle } from "../theme-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export default function Header() {
+const Header = (props: unknown) => {
   const { locale } = useLanguage();
   const { user, logout } = useAuth();
   const pathname = usePathname();
@@ -199,4 +199,6 @@ export default function Header() {
       )}
     </header>
   );
-}
+};
+
+export default Header;

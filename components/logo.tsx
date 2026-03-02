@@ -30,7 +30,7 @@ function LogoSvg({ className, size = 28 }: { className?: string; size?: number }
   );
 }
 
-export function Logo({ className, size = 28 }: LogoProps) {
+export const Logo = ({ className, size = 28 }: LogoProps) => {
   const logo = siteConfig.images?.logo;
   const alt = siteConfig.appName || siteConfig.title;
 
@@ -49,4 +49,4 @@ export function Logo({ className, size = 28 }: LogoProps) {
     );
   }
   return <Globe className={cn("h-5 w-5 shrink-0", className)} />;
-}
+};

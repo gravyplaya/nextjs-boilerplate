@@ -19,7 +19,7 @@ interface ThemeToggleProps {
   title?: string;
 }
 
-export function ThemeToggle({ variant = "default", title = "Theme" }: ThemeToggleProps) {
+export const ThemeToggle = ({ variant = "default", title = "Theme" }: ThemeToggleProps) => {
   const { setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   const { locale } = useLanguage();
@@ -104,4 +104,4 @@ export function ThemeToggle({ variant = "default", title = "Theme" }: ThemeToggl
   }
 
   return dropdownMenu;
-}
+};

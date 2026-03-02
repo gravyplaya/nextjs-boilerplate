@@ -28,10 +28,7 @@ interface LanguageSwitcherProps {
   title?: string;
 }
 
-export default function LanguageSwitcher({
-  variant = "default",
-  title = "Language",
-}: LanguageSwitcherProps) {
+const LanguageSwitcher = ({ variant = "default", title = "Language" }: LanguageSwitcherProps) => {
   const { locale, setLocale } = useLanguage();
 
   useEffect(() => {
@@ -101,4 +98,6 @@ export default function LanguageSwitcher({
   }
 
   return dropdownMenu;
-}
+};
+
+export default LanguageSwitcher;

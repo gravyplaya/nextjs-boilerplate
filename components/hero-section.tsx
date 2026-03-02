@@ -6,7 +6,7 @@ import { useTranslations } from "@/lib/i18n/use-translations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { siteConfig } from "@/lib/config/site";
 
-export default function HeroSection() {
+const HeroSection = () => {
   const { locale } = useLanguage();
   const messages = getTranslations(locale);
   const { t } = useTranslations(messages);
@@ -125,4 +125,6 @@ export default function HeroSection() {
       </div>
     </div>
   );
-}
+};
+
+export default HeroSection;

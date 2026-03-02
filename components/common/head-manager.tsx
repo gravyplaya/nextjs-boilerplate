@@ -7,7 +7,7 @@ interface HeadManagerProps {
   description?: string;
 }
 
-export function HeadManager({ title, description }: HeadManagerProps) {
+export const HeadManager = ({ title, description }: HeadManagerProps) => {
   useEffect(() => {
     if (title) {
       document.title = title;
@@ -29,4 +29,4 @@ export function HeadManager({ title, description }: HeadManagerProps) {
   }, [description]);
 
   return null;
-}
+};

@@ -9,7 +9,7 @@ import { getTranslations } from "@/lib/i18n/get-translations";
 import { useTranslations } from "@/lib/i18n/use-translations";
 import { HeadManager } from "@/components/common/head-manager";
 
-export default function AdminDashboardPage() {
+const Page = () => {
   const { user } = useAuth();
   const { locale } = useLanguage();
   const messages = getTranslations(locale);
@@ -64,4 +64,6 @@ export default function AdminDashboardPage() {
       </div>
     </>
   );
-}
+};
+
+export default Page;

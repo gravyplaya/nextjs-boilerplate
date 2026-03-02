@@ -5,7 +5,7 @@ import { useLanguage } from "@/lib/i18n/language-context";
 import { getTranslations } from "@/lib/i18n/get-translations";
 import { useTranslations } from "@/lib/i18n/use-translations";
 
-export default function AboutPage() {
+const Page = () => {
   const { locale } = useLanguage();
   const messages = getTranslations(locale);
   const { t } = useTranslations(messages);
@@ -28,4 +28,6 @@ export default function AboutPage() {
       </div>
     </>
   );
-}
+};
+
+export default Page;
