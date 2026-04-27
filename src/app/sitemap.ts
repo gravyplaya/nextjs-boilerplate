@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { baseUrl } from "@/shared/lib/config/site";
+import { baseUrl } from "@/lib/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/auth/login", "/unauthorized"];

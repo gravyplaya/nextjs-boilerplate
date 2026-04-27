@@ -1,9 +1,9 @@
 "use client";
 
-import { HeadManager } from "@/shared/components/common/head-manager";
-import { useLanguage } from "@/shared/lib/i18n/language-context";
-import { getTranslations } from "@/shared/lib/i18n/get-translations";
-import { useTranslations } from "@/shared/lib/i18n/use-translations";
+import { HeadManager } from "@/components/common/head-manager";
+import { useLanguage } from "@/features/i18n/hooks/language-context";
+import { getTranslations } from "@/features/i18n/config/get-translations";
+import { useTranslations } from "@/features/i18n/hooks/use-translations";
 
 const Page = () => {
   const { locale } = useLanguage();

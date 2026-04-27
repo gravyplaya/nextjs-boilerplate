@@ -3,8 +3,8 @@
 import type React from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/shared/lib/auth/auth-context";
-import { Sidebar } from "@/shared/layout/sidebar";
+import { useAuth } from "@/features/auth/hooks/auth-context";
+import { Sidebar } from "@/components/layout/sidebar";
 
 const ProtectedLayout = ({
   children,

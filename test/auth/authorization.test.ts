@@ -4,7 +4,7 @@ import {
   canPublishArticle,
   getPermissionsForRole,
   hasPermission,
-} from "@/shared/lib/auth/authorization";
+} from "@/features/auth/utils/authorization";
 
 describe("authorization", () => {
   it("resolves permissions for admin role", () => {

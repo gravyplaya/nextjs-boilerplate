@@ -1,11 +1,11 @@
 "use client";
 
-import { useAuth } from "@/shared/lib/auth/auth-context";
-import { useLanguage } from "@/shared/lib/i18n/language-context";
-import { getTranslations } from "@/shared/lib/i18n/get-translations";
-import { useTranslations } from "@/shared/lib/i18n/use-translations";
-import { HeadManager } from "@/shared/components/common/head-manager";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
+import { useAuth } from "@/features/auth/hooks/auth-context";
+import { useLanguage } from "@/features/i18n/hooks/language-context";
+import { getTranslations } from "@/features/i18n/config/get-translations";
+import { useTranslations } from "@/features/i18n/hooks/use-translations";
+import { HeadManager } from "@/components/common/head-manager";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Page = () => {
   const { user } = useAuth();

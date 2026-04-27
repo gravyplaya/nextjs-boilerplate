@@ -1,6 +1,6 @@
 "use client";
 
-import HeroSection from "@/shared/components/hero-section";
+import HeroSection from "@/components/hero-section";
 
 const Page = () => {
   return (

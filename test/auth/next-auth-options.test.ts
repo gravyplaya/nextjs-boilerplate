@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getPermissionsForRole } from "@/shared/lib/auth/authorization";
-import type { UserRole } from "@/shared/lib/auth/types";
+import { getPermissionsForRole } from "@/features/auth/utils/authorization";
+import type { UserRole } from "@/features/auth/types/types";
 
 describe("nextAuthOptions callbacks", () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe("nextAuthOptions callbacks", () => {
 
   it("serializes role and permissions into session", async () => {
     process.env.AUTH_ADMIN_EMAILS = "admin@example.com";
-    const { nextAuthOptions } = await import("@/shared/lib/auth/next-auth-options");
+    const { nextAuthOptions } = await import("@/features/auth/utils/next-auth-options");
     const jwt = nextAuthOptions.callbacks?.jwt;
     const session = nextAuthOptions.callbacks?.session;
 
@@ -41,7 +41,7 @@ describe("nextAuthOptions callbacks", () => {
   });
 
   it("falls back to role permissions when token permissions are missing", async () => {
-    const { nextAuthOptions } = await import("@/shared/lib/auth/next-auth-options");
+    const { nextAuthOptions } = await import("@/features/auth/utils/next-auth-options");
     const session = nextAuthOptions.callbacks?.session;
 
     expect(session).toBeDefined();

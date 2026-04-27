@@ -1,15 +1,15 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { LanguageProvider } from "@/shared/lib/i18n/language-context";
-import { AuthProvider } from "@/shared/lib/auth/auth-context";
-import { SessionProvider } from "@/shared/lib/auth/session-provider";
-import { ThemeProvider } from "@/shared/components/theme-provider";
-import { siteConfig, baseUrl } from "@/shared/lib/config/site";
+import { LanguageProvider } from "@/features/i18n/hooks/language-context";
+import { AuthProvider } from "@/features/auth/hooks/auth-context";
+import { SessionProvider } from "@/components/providers/session-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { siteConfig, baseUrl } from "@/lib/config/site";
 
 import Script from "next/script";
 import "./globals.css";
-import ClientLayout from "@/shared/layout/client-layout";
+import ClientLayout from "@/components/layout/client-layout";
 export const metadata: Metadata = {
   title: siteConfig.appName ? siteConfig.appName : siteConfig.title,
   description: siteConfig.description,

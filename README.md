@@ -34,7 +34,6 @@ Most Next.js starters leave you wiring from scratch. This boilerplate prioritize
 - Type-safe i18n (6 languages) - English, বাংলা, العربية, Français, Español, and 简体中文 with RTL. Example: `t("navigation.home")` is type-checked (invalid keys fail at compile time)
 - Role-based access control - Permission-based RBAC with role bundles (`user`, `admin`) and ownership scopes (`own`, `any`) plus [Next.js 16 parallel routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes)
 - [NextAuth.js](https://next-auth.js.org/) - Auth with optional [Google OAuth](https://next-auth.js.org/providers/google); admin role via `AUTH_ADMIN_EMAILS`
-- Logout confirmation modal - Prompts users before logout on desktop and mobile sidebar flows
 - SEO - Open Graph, Twitter Card, JSON-LD, multi-language meta, dynamic sitemap, canonical URLs
 - [next-themes](https://github.com/pacocoursey/next-themes) - Dark mode with system preference and manual toggle
 - [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) - Lint and format (Tailwind plugin, format on save in `.vscode`)
@@ -266,6 +265,29 @@ Your URL stays clean. Even with parallel routes like `app/(protected)/@admin/das
 | `npm run e2e:webkit`      | Run E2E in WebKit (Safari) only             |
 | `npm run prettier`        | Check formatting                            |
 | `npm run prettier:fix`    | Fix formatting                              |
+
+<br/><br/>
+
+## 🐳 Docker
+
+### Build and run with Docker
+
+```bash
+docker build -t nextjs-elite .
+docker run --env-file .env -p 3000:3000 nextjs-elite
+```
+
+### Run with Docker Compose
+
+```bash
+docker compose up --build
+```
+
+The project includes:
+
+- `Dockerfile` with multi-stage build and standalone Next.js output
+- `.dockerignore` for smaller/faster builds
+- `docker-compose.yml` for local production-like container run
 
 <br/><br/>
 

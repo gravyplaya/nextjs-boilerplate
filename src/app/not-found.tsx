@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/shared/ui/button";
+import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
   return (
