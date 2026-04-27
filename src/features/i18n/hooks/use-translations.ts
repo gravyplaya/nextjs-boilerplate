@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import type { TranslationKeys } from "./types";
-import type { Messages } from "./get-translations";
-import { getNestedValue } from "./get-translations";
+import type { TranslationKeys } from "../types/types";
+import type { Messages } from "../config/get-translations";
+import { getNestedValue } from "../config/get-translations";
 
 /**
  * Custom hook for type-safe translations

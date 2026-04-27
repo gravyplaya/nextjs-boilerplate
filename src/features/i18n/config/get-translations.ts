@@ -1,5 +1,5 @@
-import type { Locale } from "./types";
-import type { TranslationKeys } from "./types";
+import type { Locale } from "../types/types";
+import type { TranslationKeys } from "../types/types";
 import enTranslations from "@/locales/en.json";
 import bnTranslations from "@/locales/bn.json";
 import arTranslations from "@/locales/ar.json";

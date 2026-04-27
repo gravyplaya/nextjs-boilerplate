@@ -270,17 +270,37 @@ Your URL stays clean. Even with parallel routes like `app/(protected)/@admin/das
 
 ## 🐳 Docker
 
+### Prerequisites
+
+```bash
+cp .env.example .env
+```
+
 ### Build and run with Docker
 
 ```bash
-docker build -t nextjs-elite .
-docker run --env-file .env -p 3000:3000 nextjs-elite
+docker build -t nextjs-elite-boilerplate .
+docker run --rm --name nextjs-elite-boilerplate --env-file .env -p 3000:3000 nextjs-elite-boilerplate
+```
+
+App is available at [http://localhost:3000](http://localhost:3000).
+
+### Stop standalone container
+
+```bash
+docker stop nextjs-elite-boilerplate
 ```
 
 ### Run with Docker Compose
 
 ```bash
 docker compose up --build
+```
+
+### Stop Docker Compose
+
+```bash
+docker compose down
 ```
 
 The project includes:
