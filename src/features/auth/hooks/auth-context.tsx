@@ -17,6 +17,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useMemo,
   useState,
   useSyncExternalStore,
 } from 'react';
@@ -41,18 +42,9 @@ function subscribeToStoredUser(onStoreChange: () => void) {
   return () => window.removeEventListener('storage', handleStorage);
 }
 
-function getStoredUser(): AuthUser | null {
+function getStoredUserSnapshot(): string | null {
   if (typeof window === 'undefined') return null;
-  const stored = window.localStorage.getItem('user');
-  if (stored) {
-    try {
-      return JSON.parse(stored) as AuthUser;
-    } catch {
-      window.localStorage.removeItem('user');
-      return null;
-    }
-  }
-  return null;
+  return window.localStorage.getItem('user');
 }
 
 function sessionToAuthUser(
@@ -72,13 +64,25 @@ function sessionToAuthUser(
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
-  const storedDemoUser = useSyncExternalStore(
+  const storedDemoUserSnapshot = useSyncExternalStore(
     subscribeToStoredUser,
-    getStoredUser,
+    getStoredUserSnapshot,
     () => null,
   );
   const [demoUser, setDemoUser] = useState<AuthUser | null>(null);
   const router = useRouter();
+  const storedDemoUser = useMemo(() => {
+    if (!storedDemoUserSnapshot) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(storedDemoUserSnapshot) as AuthUser;
+    } catch {
+      window.localStorage.removeItem('user');
+      return null;
+    }
+  }, [storedDemoUserSnapshot]);
 
   const userFromSession =
     status === 'authenticated' && session?.user
@@ -118,11 +122,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setDemoUser(null);
     window.localStorage.removeItem('user');
     if (status === 'authenticated') {
-      signOut({ redirect: false }).then(() => router.push('/auth/login'));
+      void signOut({ callbackUrl: '/login' });
     } else {
-      router.push('/auth/login');
+      router.replace('/login');
+      router.refresh();
     }
-  }, [status, router]);
+  }, [router, status]);
 
   const signInWithGoogle = useCallback(async () => {
     await signIn('google', { callbackUrl: '/dashboard' });

@@ -20,7 +20,7 @@ const ProtectedLayout = ({
 
   useEffect(() => {
     if (!isLoading && !currentUser) {
-      router.replace('/auth/login');
+      router.replace('/login');
     }
   }, [currentUser, isLoading, router]);
 

@@ -64,6 +64,7 @@ const Page = () => {
 
     try {
       await login(email, password);
+      router.replace('/dashboard');
     } catch {
       setError(t('auth.login.invalidCredentials'));
       setPassword('');
@@ -73,7 +74,7 @@ const Page = () => {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-[calc(100vh-200px)] items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center px-4 py-10">
         <div>{t('common.loading')}</div>
       </div>
     );
@@ -88,7 +89,7 @@ const Page = () => {
       <HeadManager
         title={`${t('navigation.login')} | ${t('common.appName')}`}
       />
-      <div className="flex min-h-[calc(100vh-200px)] items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center px-4 py-10">
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle>{t('auth.login.title')}</CardTitle>

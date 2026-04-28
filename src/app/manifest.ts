@@ -41,7 +41,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: 'Login',
         short_name: 'Login',
         description: 'Sign in to your account',
-        url: '/auth/login',
+        url: '/login',
       },
       {
         name: 'About',

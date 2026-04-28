@@ -105,7 +105,7 @@ const Header = () => {
                 </Button>
               </div>
             ) : (
-              <Link href="/auth/login">
+              <Link href="/login">
                 <Button size="sm" className="h-8 text-xs">
                   {t('navigation.login')}
                 </Button>
@@ -198,10 +198,7 @@ const Header = () => {
                   </Button>
                 </div>
               ) : (
-                <Link
-                  href="/auth/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                   <Button size="sm" className="w-full">
                     {t('navigation.login')}
                   </Button>

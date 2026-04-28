@@ -20,7 +20,7 @@ test('health check returns ok', async ({ request }) => {
 });
 
 test('login page loads', async ({ page }) => {
-  await page.goto('/auth/login');
-  await expect(page).toHaveURL(/\/auth\/login/);
+  await page.goto('/login');
+  await expect(page).toHaveURL(/\/login/);
   await expect(page.getByRole('textbox', { name: /email/i })).toBeVisible();
 });
