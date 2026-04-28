@@ -260,7 +260,7 @@ Your URL stays clean. Even with parallel routes like `app/(protected)/@admin/das
 ## 🔄 CI / DX
 
 - **GitHub Actions:** `.github/workflows/check.yml` runs on push/PR: lint, Prettier check, unit tests, build. `.github/workflows/playwright.yml` runs E2E (Chromium, Firefox, WebKit).
-- **Prettier:** `prettier.config.js` + Tailwind plugin. `npm run prettier` to check, `npm run prettier:fix` to fix.
+- **Prettier:** `prettier.config.js` + Tailwind plugin. `npm run format` to check, `npm run format:fix` to fix.
 - **Editor:** `.vscode/settings.json` enables format on save and ESLint fix on save.
 - **Renovate:** `renovate.json` is configured for weekly dependency PRs, grouped non-major updates, and automerge for safe patch/minor updates.
 
@@ -287,8 +287,8 @@ Your URL stays clean. Even with parallel routes like `app/(protected)/@admin/das
 | `npm run e2e`             | Run Playwright E2E tests                    |
 | `npm run e2e:ui`          | Run Playwright with UI                      |
 | `npm run e2e:webkit`      | Run E2E in WebKit (Safari) only             |
-| `npm run prettier`        | Check formatting                            |
-| `npm run prettier:fix`    | Fix formatting                              |
+| `npm run format`          | Check formatting                            |
+| `npm run format:fix`      | Fix formatting                              |
 
 <br/><br/>
 
