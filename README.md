@@ -24,7 +24,7 @@
 
 ## Motivation
 
-Most Next.js starters leave you wiring from scratch. This boilerplate prioritizes **app-ready defaults**: A production-ready Next.js SaaS Boilerplate with Type-safe i18n (6 languages) + NextAuth, Google OAuth + RBAC with parallel routes + SEO (sitemap, robots, manifest) + Theme + ESLint + Prettier + Vitest + Playwright.
+Most Next.js starters leave you wiring from scratch. This boilerplate prioritizes **app-ready defaults**: A production-ready Next.js SaaS Boilerplate with Type-safe i18n (6 languages) + BetterAuth, Google OAuth + RBAC with parallel routes + SEO (sitemap, robots, manifest) + Theme + ESLint + Prettier + Vitest + Playwright.
 
 <br/><br/>
 
@@ -33,7 +33,8 @@ Most Next.js starters leave you wiring from scratch. This boilerplate prioritize
 - Central config - Single [app-main-meta-data.json](src/lib/config/app-main-meta-data.json) for app name, SEO, languages, organization, theme; drives metadata, sitemap, robots, manifest
 - Type-safe i18n (6 languages) - English, বাংলা, العربية, Français, Español, and 简体中文 with RTL. Example: `t("navigation.home")` is type-checked (invalid keys fail at compile time)
 - Role-based access control - Permission-based RBAC with role bundles (`user`, `admin`) and ownership scopes (`own`, `any`) plus [Next.js 16 parallel routes](https://nextjs.org/docs/app/building-your-application/routing/parallel-routes)
-- [NextAuth.js](https://next-auth.js.org/) - Auth with optional [Google OAuth](https://next-auth.js.org/providers/google); admin role via `AUTH_ADMIN_EMAILS`
+- [BetterAuth](https://www.better-auth.com/) - Auth with optional Google OAuth; admin role via `AUTH_ADMIN_EMAILS` / `NEXT_PUBLIC_AUTH_ADMIN_EMAILS`
+- [Zod](https://zod.dev/) - Runtime validation for env, site config, auth payloads, and locale parsing
 - SEO - Open Graph, Twitter Card, JSON-LD, multi-language meta, dynamic sitemap, canonical URLs
 - [next-themes](https://github.com/pacocoursey/next-themes) - Dark mode with system preference and manual toggle
 - [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) - Lint and format (Tailwind plugin, format on save in `.vscode`)
@@ -98,7 +99,7 @@ This boilerplate uses **Next.js 16** (16.2.4) for **stability and security**. St
 
 1. Copy `.env.example` to `.env` and set `NEXT_PUBLIC_APP_URL` if you need to override the site URL (e.g. in production).
 2. Edit **`src/lib/config/app-main-meta-data.json`** — main config for app name, domain, SEO, languages, organization, and theme. Sitemap, robots, and manifest are generated from it.
-3. For **Google sign-in**: set `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` in `.env`, then set `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=true`. See [Google OAuth setup](#google-oauth-setup) below.
+3. For **Google sign-in**: set `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` in `.env`, then set `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=true`. See [Google OAuth setup](#google-oauth-setup) below.
 
 <br/><br/>
 
@@ -119,10 +120,11 @@ This boilerplate uses **Next.js 16** (16.2.4) for **stability and security**. St
 │   │   │   ├── @user/           # User dashboard
 │   │   │   └── layout.tsx       # Chooses segment based on role
 │   │   ├── api/                 # API routes
-│   │   │   ├── auth/            # NextAuth routes
+│   │   │   ├── auth/            # BetterAuth routes
 │   │   │   └── health/          # Health check endpoint
-│   │   ├── layout.tsx           # Root layout (providers, SEO, theme, i18n)
-│   │   ├── providers.tsx        # App-level providers
+│   │   ├── layout.tsx           # Root layout (SEO + server shell)
+│   │   ├── client-providers.tsx # Minimal global client providers (theme, toaster)
+│   │   ├── providers.tsx        # Route-scoped auth + language providers
 │   │   ├── error.tsx            # Global error boundary
 │   │   ├── not-found.tsx        # 404 page
 │   │   ├── manifest.ts          # Web manifest from config
@@ -134,9 +136,14 @@ This boilerplate uses **Next.js 16** (16.2.4) for **stability and security**. St
 │   │   ├── layout/              # Header/sidebar/layout wrappers
 │   │   ├── providers/           # Theme/session providers
 │   │   └── ui/                  # shadcn/ui components
-│   ├── features/                # Feature modules (auth, i18n, etc.)
+│   ├── core/                    # Core cross-cutting runtime modules
+│   │   └── env/                 # Environment parsing entrypoint
+│   ├── features/                # Feature modules (auth, i18n, navigation, theme, site)
 │   │   ├── auth/                # Auth + RBAC logic
-│   │   └── i18n/                # i18n config, hooks, server helpers, types
+│   │   ├── i18n/                # i18n config, hooks, server helpers, types
+│   │   ├── navigation/          # App navigation shells (header/sidebar)
+│   │   ├── site/                # Site metadata/config accessors
+│   │   └── theme/               # Theme context and UI
 │   ├── hooks/                   # Shared React hooks
 │   ├── lib/                     # Core logic, config, and utils
 │   │   └── config/              # Central config (app-main-meta-data.json)
@@ -211,8 +218,8 @@ t('navigation.home');
 
 1. **Google Cloud Console**: Go to [APIs & Credentials](https://console.cloud.google.com/apis/credentials) and create an OAuth 2.0 Client ID (Web application).
 2. **Authorized redirect URI**: Add `http://localhost:3000/api/auth/callback/google` (dev) and your production URL (e.g. `https://yourdomain.com/api/auth/callback/google`).
-3. **`.env`**: Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `NEXTAUTH_URL` (e.g. `http://localhost:3000`), and `NEXTAUTH_SECRET` (e.g. `openssl rand -base64 32`). Set `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=true` to show the Google sign-in button.
-4. **Admin role**: Optionally set `AUTH_ADMIN_EMAILS=admin@yourdomain.com` (comma-separated) so those Google accounts get the admin role and admin permission bundle.
+3. **`.env`**: Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `BETTER_AUTH_URL` (e.g. `http://localhost:3000`), and `BETTER_AUTH_SECRET` (e.g. `openssl rand -base64 32`). Set `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=true` to show the Google sign-in button.
+4. **Admin role**: Set `AUTH_ADMIN_EMAILS=admin@yourdomain.com` and `NEXT_PUBLIC_AUTH_ADMIN_EMAILS=admin@yourdomain.com` (comma-separated) so those Google accounts get the admin role and admin permission bundle.
 
 ### Adding a New Role
 
@@ -338,7 +345,7 @@ The project includes:
 
 - **Framework:** Next.js 16.2.4 (App Router)
 - **Language:** TypeScript
-- **Auth:** NextAuth.js (Google OAuth, JWT session)
+- **Auth:** BetterAuth (Google OAuth)
 - **Styling:** Tailwind CSS v4
 - **Components:** shadcn/ui
 - **Internationalization:** Type-safe i18n (locales from config)
