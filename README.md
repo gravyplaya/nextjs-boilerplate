@@ -213,7 +213,7 @@ const { data } = useQuery({
 `.env.example` documents every variable. They are validated by `src/libs/env.ts` (T3 Env).
 
 - `BETTER_AUTH_URL` is optional. On Vercel it defaults to `https://${VERCEL_URL}` (or `http://localhost:3000` locally).
-- `BETTER_AUTH_SECRET` must be set in production runtime (32+ chars). Builds will pass, but the app will throw on boot if it’s missing.
+- `BETTER_AUTH_SECRET` must be set in production runtime (32+ chars). Builds will pass; if it’s missing at runtime the app logs a warning so you don’t get surprise crashes during deploys.
 
 Example:
 
@@ -321,8 +321,8 @@ It drives:
 
 ## Testing
 
-- **Unit / component:** Vitest + React Testing Library. Specs live in `tests/`.
-- **End-to-end:** Playwright in `e2e/`. Run `npm run e2e` (boots the dev server automatically).
+- **Unit / component:** Vitest + React Testing Library. Specs live in `tests/` for fast feedback while you build features.
+- **End-to-end:** Playwright in `e2e/`. `npm run e2e` boots the dev server automatically; `npm run e2e:ui` is great for debugging selectors and replaying failures locally.
 - **WebKit-only setup** (saves disk space): `npx playwright install webkit && npm run e2e:webkit`.
 - **Coverage:** `npm run test:coverage`.
 
@@ -330,10 +330,13 @@ It drives:
 
 ## DX & Tooling
 
-- **Lefthook** runs `eslint --fix` and `prettier --write` on staged files pre-commit, and validates commit messages with **commitlint** (Conventional Commits).
-- **Knip** keeps the codebase clean of dead exports, unused files, and unused dependencies.
-- **Storybook** for isolated component development. Stories live next to components.
-- **Sentry** is wired through `instrumentation.ts` (server) and `instrumentation-client.ts` (client). Provide DSNs to enable.
+- **Lefthook + commitlint**: auto-fix lint/format on staged files and enforce Conventional Commits (keeps PRs consistent).
+- **Knip**: dead-code and dependency hygiene (unused files/exports/deps) so the repo stays clean as it grows.
+- **Type-safe env (T3 Env)**: `src/libs/env.ts` validates server/client env at build time so misconfigurations fail early.
+- **Storybook**: isolated component development; stories live next to components so UI work stays fast and reviewable.
+- **Sentry**: wired through `instrumentation.ts` (server) + `instrumentation-client.ts` (client) for production error visibility.
+- **Upstash utilities**: optional `@upstash/ratelimit` helpers for protecting route handlers and server actions.
+- **Structured logging**: `pino` server logger with pretty output in development.
 - **Renovate** (`renovate.json`) groups non-major updates and automerges patches.
 
 <br/>
