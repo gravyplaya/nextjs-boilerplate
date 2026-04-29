@@ -16,10 +16,26 @@ const booleanFromString = z
   .default('false')
   .transform((value) => value === 'true');
 
+const defaultAuthUrl = () => {
+  if (process.env.BETTER_AUTH_URL) return process.env.BETTER_AUTH_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:3000';
+};
+
+const PLACEHOLDER_AUTH_SECRET = 'PLEASE_SET_BETTER_AUTH_SECRET_32_CHARS_MIN';
+
 export const env = createEnv({
   server: {
-    BETTER_AUTH_URL: z.string().url(),
-    BETTER_AUTH_SECRET: z.string().min(32),
+    BETTER_AUTH_URL: z
+      .string()
+      .url()
+      .optional()
+      .transform((value) => value ?? defaultAuthUrl()),
+    BETTER_AUTH_SECRET: z
+      .string()
+      .min(32)
+      .optional()
+      .transform((value) => value ?? PLACEHOLDER_AUTH_SECRET),
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),
     AUTH_ADMIN_EMAILS: csvEmails,
