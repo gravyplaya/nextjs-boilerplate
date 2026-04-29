@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Next.js Elite — Production-Ready SaaS Boilerplate</h1>
+<h1>Next.js Elite: Production-Ready SaaS Boilerplate</h1>
 <p><strong>Frontend-first, API-driven, batteries included.</strong> Built on Next.js 16 + React 19, with i18n, RBAC, BetterAuth, and a polished DX out of the box.</p>
 </div>
 
@@ -223,12 +223,17 @@ const { data } = useQuery({
 
 ### Environment variables
 
-`.env.example` documents every variable. They are validated at build time by `src/libs/env.ts` (T3 Env). Example:
+`.env.example` documents every variable. They are validated by `src/libs/env.ts` (T3 Env).
+
+- `BETTER_AUTH_URL` is optional. On Vercel it defaults to `https://${VERCEL_URL}` (or `http://localhost:3000` locally).
+- `BETTER_AUTH_SECRET` must be set in production runtime (32+ chars). Builds will pass, but the app will throw on boot if it’s missing.
+
+Example:
 
 ```bash
-# Required
-BETTER_AUTH_URL=http://localhost:3000
-BETTER_AUTH_SECRET=your_32_char_secret      # openssl rand -base64 32
+# BetterAuth
+# BETTER_AUTH_URL=http://localhost:3000           # optional; derived on Vercel
+BETTER_AUTH_SECRET=your_32_char_secret            # openssl rand -base64 32
 
 # Optional — Google OAuth
 NEXT_PUBLIC_GOOGLE_AUTH_ENABLED=false
@@ -239,7 +244,10 @@ GOOGLE_CLIENT_SECRET=
 AUTH_ADMIN_EMAILS=admin@yourdomain.com
 NEXT_PUBLIC_AUTH_ADMIN_EMAILS=admin@yourdomain.com
 
-# Optional — Upstash Redis (BetterAuth + rate-limit)
+# Demo mode
+NEXT_PUBLIC_DEMO_MODE=true
+
+# Optional — Upstash Redis (rate-limit / persistence)
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 
@@ -265,120 +273,24 @@ It drives:
 ```jsonc
 {
   "appName": "Next.js Elite",
-  "appType": "Enterprise SaaS Starter",
-  "tagline": "Enterprise-Grade Foundation: i18n, RBAC, and OAuth",
-  "title": "Next.js Elite: The Ultimate SaaS Starter with i18n & RBAC",
-  "description": "Production-ready Next.js boilerplate with i18n and RBAC.",
-  "locale": "en_US",
-  "language": "en-US",
   "domain": "https://yourdomain.com",
-  "canonicalPath": "/",
-  "applicationCategory": "WebApplication",
-  "audience": "Developers, Businesses",
-  "keywords": ["nextjs", "i18n", "rbac", "boilerplate"],
-  "features": ["Multi-language Support", "Role-Based Access Control"],
-
+  "tagline": "Frontend-first, API-driven, batteries included.",
+  "title": "Next.js Elite — Production-Ready SaaS Boilerplate",
+  "description": "Frontend-first Next.js 16 + React 19 boilerplate with i18n, RBAC and BetterAuth.",
   "languages": {
     "supported": ["en", "bn", "ar", "fr", "es", "zh"],
     "default": "en",
-    "locales": {
-      "en": {
-        "code": "en",
-        "name": "English",
-        "nativeName": "English",
-        "locale": "en_US",
-        "direction": "ltr",
-      },
-      "ar": {
-        "code": "ar",
-        "name": "Arabic",
-        "nativeName": "العربية",
-        "locale": "ar_SA",
-        "direction": "rtl",
-      },
-      // … bn, fr, es, zh
-    },
   },
-
   "organization": {
     "name": "Your Organization",
-    "legalName": "Your Organization Legal Name",
     "url": "https://yourdomain.com",
-    "logo": "/logo.svg",
-    "email": "contact@yourdomain.com",
-    "phone": "+1-234-567-8900",
-    "foundingDate": "2024-01-01",
-    "address": {
-      "street": "123 Main Street",
-      "city": "New York",
-      "region": "NY",
-      "postalCode": "10001",
-      "country": "United States",
-      "countryCode": "US",
-    },
   },
-
-  "contact": {
-    "supportEmail": "support@yourdomain.com",
-    "salesEmail": "sales@yourdomain.com",
-    "phoneNumber": "+1-234-567-8900",
-  },
-
-  "social": {
-    "facebook": "https://facebook.com/yourpage",
-    "twitter": "@yourhandle",
-    "linkedin": "https://linkedin.com/company/yourcompany",
-    "instagram": "https://instagram.com/yourhandle",
-    "youtube": "https://youtube.com/@yourchannel",
-    "github": "https://github.com/yourusername",
-  },
-
-  "images": {
-    "og": "/og-image.webp",
-    "logo": "/logo.svg",
-    "ogWidth": 1200,
-    "ogHeight": 630,
-  },
-
-  "icons": {
-    "favicon": "/favicon.ico",
-    "svg": "/icon.svg",
-    "appleTouchIcon": "/apple-touch-icon.png",
-  },
-
-  "theme": { "light": "#ffffff", "dark": "#000000" },
-
-  "pricing": {
-    "model": "freemium",
-    "currency": "USD",
-    "minPrice": "0",
-    "maxPrice": "99",
-  },
-
+  "images": { "og": "/og-image.webp" },
   "manifest": "/manifest.webmanifest",
 }
 ```
 
-#### Field reference
-
-| Field                                              | Used by                                                              |
-| -------------------------------------------------- | -------------------------------------------------------------------- |
-| `appName` / `title` / `description`                | Root metadata, OpenGraph, Twitter Cards, JSON-LD                     |
-| `tagline` / `appType`                              | Hero section, marketing copy                                         |
-| `domain` / `canonicalPath`                         | Canonical URLs, sitemap base, OpenGraph URL, JSON-LD `url`           |
-| `keywords` / `features`                            | `<meta name="keywords">`, JSON-LD `featureList`                      |
-| `applicationCategory` / `audience`                 | JSON-LD `WebApplication` schema                                      |
-| `languages.*`                                      | `next-intl` locales, `<html lang>`, `dir`, `hreflang` alternates     |
-| `organization.*`                                   | JSON-LD `Organization` schema                                        |
-| `contact.*`                                        | JSON-LD `ContactPoint`                                               |
-| `social.*`                                         | OpenGraph + JSON-LD `sameAs` array                                   |
-| `images.og` / `images.ogWidth` / `images.ogHeight` | OG and Twitter Card images                                           |
-| `icons.*`                                          | Favicons, Apple touch icon, manifest icons                           |
-| `theme.light` / `theme.dark`                       | `<meta name="theme-color">` per color scheme, manifest `theme_color` |
-| `pricing.*`                                        | JSON-LD `Offer` (commented in by default for SaaS apps)              |
-| `manifest`                                         | PWA manifest path                                                    |
-
-> The Zod schema in `src/features/site/config.ts` is the canonical source. Add new fields there first; the JSON will fail validation until it matches.
+> For the full schema and all available fields, see `src/features/site/site.config.json` and the Zod parser in `src/features/site/config.ts`.
 
 ### Adding a language
 
