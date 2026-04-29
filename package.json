@@ -86,7 +86,7 @@
     "knip": "^6.9.0",
     "lefthook": "^1.8.0",
     "pino-pretty": "^11.2.0",
-    "postcss": "^8.5.12",
+    "postcss": "8.5.12",
     "prettier": "3.8.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "0.7.2",
@@ -98,6 +98,7 @@
     "vitest": "4.1.0"
   },
   "overrides": {
+    "postcss": "8.5.12",
     "uuid": "^14.0.0"
   }
 }
