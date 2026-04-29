@@ -5,8 +5,8 @@ import type { ReactNode } from 'react';
 
 interface ProtectedLayoutProps {
   children: ReactNode;
-  user: ReactNode;
-  admin: ReactNode;
+  user?: ReactNode;
+  admin?: ReactNode;
 }
 
 const ProtectedLayout = async ({
@@ -23,7 +23,7 @@ const ProtectedLayout = async ({
     currentUser.permissions,
     'dashboard.view:user',
   );
-  const slot = canViewAdmin ? admin : canViewUser ? user : children;
+  const slot = (canViewAdmin && admin) || (canViewUser && user) || children;
 
   return (
     <div className="flex h-screen">
