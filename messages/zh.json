@@ -68,6 +68,12 @@
     "logout": {
       "title": "退出登录",
       "confirm": "您确定要退出登录吗？"
+    },
+    "passwordReset": {
+      "title": "重置密码",
+      "email": "电子邮件",
+      "submit": "发送重置链接",
+      "submitted": "如果该邮箱存在账号，您将很快收到重置链接。"
     }
   },
   "home": {

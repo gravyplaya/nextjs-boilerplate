@@ -68,6 +68,12 @@
     "logout": {
       "title": "Cerrar sesión",
       "confirm": "¿Está seguro de que desea cerrar sesión?"
+    },
+    "passwordReset": {
+      "title": "Restablecer contraseña",
+      "email": "Correo electrónico",
+      "submit": "Enviar enlace de restablecimiento",
+      "submitted": "Si existe una cuenta con ese correo, recibirá un enlace de restablecimiento en breve."
     }
   },
   "home": {

@@ -68,6 +68,12 @@
     "logout": {
       "title": "Logout",
       "confirm": "Are you sure you want to logout?"
+    },
+    "passwordReset": {
+      "title": "Reset password",
+      "email": "Email",
+      "submit": "Send reset link",
+      "submitted": "If an account exists for that email, you’ll receive a reset link shortly."
     }
   },
   "home": {

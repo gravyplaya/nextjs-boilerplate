@@ -2,7 +2,12 @@
 
 import { Logo } from '@/components/shared/logo';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import {
   Tooltip,
   TooltipContent,
@@ -352,6 +357,7 @@ export function Sidebar() {
               side={isRtl ? 'right' : 'left'}
               className="w-[240px] p-0"
             >
+              <SheetTitle className="sr-only">{t('sidebar.menu')}</SheetTitle>
               <SidebarContent
                 user={user}
                 pathname={pathname}

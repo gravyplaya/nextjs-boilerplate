@@ -68,6 +68,12 @@
     "logout": {
       "title": "Déconnexion",
       "confirm": "Êtes-vous sûr de vouloir vous déconnecter ?"
+    },
+    "passwordReset": {
+      "title": "Réinitialiser le mot de passe",
+      "email": "E-mail",
+      "submit": "Envoyer le lien de réinitialisation",
+      "submitted": "Si un compte existe pour cet e-mail, vous recevrez bientôt un lien de réinitialisation."
     }
   },
   "home": {
