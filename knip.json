@@ -36,6 +36,7 @@
     "@testing-library/user-event",
     "tsx",
     "tailwindcss",
+    "@swc/helpers",
     "eslint-plugin-tailwindcss",
     "eslint-plugin-jsx-a11y"
   ],
