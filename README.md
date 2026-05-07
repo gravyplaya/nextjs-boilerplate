@@ -21,6 +21,11 @@
 
 <img src="https://nextjs-elite-boilerplate.vercel.app/og-image.webp" alt="Next.js Elite Boilerplate" />
 
+<br/>
+
+<h3>Lighthouse report</h3>
+<img src="./public/lighthouse.webp" alt="Lighthouse test results" />
+
 </div>
 
 ---
